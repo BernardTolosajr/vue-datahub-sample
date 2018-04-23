@@ -9,9 +9,17 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const DataHub = require('macaca-datahub')
+const datahubProxyMiddle = require('datahub-proxy-middleware')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+
+const datahubConfig = config.dev.datahubConfig
+
+const defaultDatahub = new DataHub({
+  port: datahubConfig.port
+})
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -42,6 +50,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    before: app => {
+      datahubProxyMiddle(app)(datahubConfig)
+    },
+    after: () => {
+      defaultDatahub.startServer(datahubConfig).then(() => {})
     }
   },
   plugins: [

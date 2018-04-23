@@ -1,0 +1,16 @@
+[
+  {
+    "identifer": "vuesample",
+    "pathname": "users",
+    "description": "get users",
+    "method": "ALL",
+    "currentScene": "default",
+    "proxyContent": "{}",
+    "params": "{}",
+    "reqSchemaContent": "{}",
+    "resSchemaContent": "{}",
+    "responseHeader": "{}",
+    "scenes": "[{\"name\":\"default\",\"data\":{\"data\":[{\"id\":1,\"name\":\"mario\"}]}}]",
+    "delay": "0"
+  }
+]

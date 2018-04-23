@@ -40,7 +40,20 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true
+    cssSourceMap: true,
+
+    //https://github.com/macacajs/macaca-datahub/blob/master/macaca-datahub.config.js
+    datahubConfig: {
+      port: 5678,
+      hostname: '127.0.0.1',
+      store: path.join(__dirname, '..', 'data'),
+      proxy: {
+        '^/api': {
+          hub: 'vuesample',
+        }
+      },
+      showBoard: false
+    }
   },
 
   build: {
